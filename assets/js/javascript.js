@@ -1,4 +1,8 @@
-var timerEl = document.querySelector(".timer")
+var timerEl = document.querySelector(".timer");
+var headerEl = document.querySelector("header");
+var highScoreEl = document.querySelector(".high-score");
+var quizHeaderEl = document.querySelector(".quiz-question");
+var quizContentEl = document.querySelector(".quiz-content");
 
 var questionBankArray = [
     {

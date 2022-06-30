@@ -1,0 +1,40 @@
+* {
+    font-family: Arial, Helvetica, sans-serif;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+header {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+.high-score {
+    color: purple;
+}
+
+section {
+    display: flex;
+    justify-content: center;
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 10% 10%;
+    width: 70%
+}
+
+.question {
+    padding: 10px 0px;
+    font-size: 38px;
+    flex: 1 100%;
+}
+
+.question p {
+    font-size: 26px;
+    font-weight: normal;
+}
