@@ -28,13 +28,44 @@ section {
     width: 70%
 }
 
-.question {
+.quiz-question {
     padding: 10px 0px;
     font-size: 38px;
     flex: 1 100%;
 }
 
-.question p {
+.quiz-question p {
     font-size: 26px;
     font-weight: normal;
+}
+
+footer {
+    flex: 1 100%
+};
+
+.quiz-footer {
+    color: gray;
+    font-style: italic;
+    border-top: solid 2px gray;
+    flex: 1 100%;
+    margin-top: 10px
+}
+
+.button {
+    background-color: indigo;
+    color: white;
+    font-size: 26px;
+    padding: 10px;
+    margin: 0 10px 10px 0;
+    border-radius: 10px;
+    border: none,
+    list-style-position: inside;
+}
+
+.quiz-content {
+    justify-content: space-between;
+}
+
+.button:hover {
+    background-color: purple;
 }
