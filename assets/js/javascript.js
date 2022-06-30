@@ -4,6 +4,7 @@ var highScoreEl = document.querySelector(".high-score");
 var quizHeaderEl = document.querySelector(".quiz-question");
 var quizContentEl = document.querySelector(".quiz-content");
 
+
 var questionBankArray = [
     {
         question: "Arrays in JavaScript can be used to store ___.",
@@ -31,3 +32,25 @@ var questionBankArray = [
         answer: 4
     },
 ]
+
+var timer = 75;
+var currentQuestion = 0;
+var timeout;
+
+var countDown = function () {
+    if (timer > 0) {
+        timer--;
+        timerEl.textContent = timer;
+        timeout = setTimeout(countDown, 1000);
+    } else {
+        clearTimeout(timeout);
+    }
+};
+
+var setQuizHeader = function (content) {
+    quizHeaderEl.innerHTML = content;
+};
+
+var setQuizContent = function (element) {
+    quizContentEl.replaceChildren(element);
+};
