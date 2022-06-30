@@ -54,3 +54,11 @@ var setQuizHeader = function (content) {
 var setQuizContent = function (element) {
     quizContentEl.replaceChildren(element);
 };
+
+
+
+
+
+resetGame();
+highScoreEl.addEventListener("click", quizContentHandler);
+quizContentEl.addEventListener("click", quizContentHandler);
