@@ -55,6 +55,28 @@ var setQuizContent = function (element) {
     quizContentEl.replaceChildren(element);
 };
 
+var quizContentHandler = function (event) {
+    if (event.target.getAttribute("id") === "start") {
+        countDown();
+        buildQuestion(questionBankArray[currentQuestion]);
+        return;
+    } else if (event.target.getAttribute("id") === "back") {
+        resetGame();
+        return;
+    }
+}
+
+var resetGame = function () {
+    currentQuestion = 0;
+    timer = 75;
+    timerEl.textContent = timer;
+    setQuizHeader("JavaScript Coding Quiz Challenge! Try to answer all the following questions within the time limit. There is a penalty if you answer incorrectly, so try to get them in one go!");
+    startButtonEl = document.createElement("button");
+    startButtonEl.textcontent = "Start Quiz";
+    startButtonEl.className = "button";
+    startButtonEl.setAttribute("id", "start");
+    setQuizContent(startButtonEl);
+};
 
 
 
