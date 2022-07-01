@@ -35,14 +35,8 @@ section {
 }
 
 .quiz-question p {
-    font-size: 26px;
+    font-size: 28px;
     font-weight: normal;
-}
-
-.start-btn {
-    padding: 10px 0px;
-    font-size: 34px;
-    flex: 1 100%;
 }
 
 footer {

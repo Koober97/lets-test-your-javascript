@@ -3,6 +3,13 @@ var headerEl = document.querySelector("header");
 var highScoreEl = document.querySelector(".high-score");
 var quizHeaderEl = document.querySelector(".quiz-question");
 var quizContentEl = document.querySelector(".quiz-content");
+var startBtn = document.querySelector("start");
+
+var score = 0;
+var questionIndex = 0;
+var timeLeft = 60;
+var currentQuestion = 0;
+var timeOver = "You have run out of time!";
 
 
 var questionBank = [
@@ -33,19 +40,12 @@ var questionBank = [
     },
 ]
 
-var timer = 75;
-var currentQuestion = 0;
-var timeout;
+start.Btn.addEventListener("click", function() {
+    countDown();
+    startQuiz(questionIndex);
+});
 
-var countDown = function () {
-    if (timer > 0) {
-        timer--;
-        timerEl.textContent = timer;
-        timeout = setTimeout(countDown, 1000);
-    } else {
-        clearTimeout(timeout);
-    }
-};
+
 
 
 
