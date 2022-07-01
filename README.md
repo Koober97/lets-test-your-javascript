@@ -10,7 +10,7 @@
 * Will resubmit once I have a better understanding of this assignment
 
 ## Screenshot of Code
-!
+![Sample of Incomplete Code](assets/screenshot/code-screenshot.png)
 
 ## Deployed Link
 *
