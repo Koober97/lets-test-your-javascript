@@ -3,15 +3,15 @@ var headerEl = document.querySelector("header");
 var highScoreEl = document.querySelector(".high-score");
 var quizHeaderEl = document.querySelector(".quiz-question");
 var quizContentEl = document.querySelector(".quiz-content");
-var startBtn = document.querySelector("start");
 
 var score = 0;
 var questionIndex = 0;
 var timeLeft = 60;
 var currentQuestion = 0;
+var timeInterval = "";
 var timeOver = "You have run out of time!";
 
-
+// Question array to pull from
 var questionBank = [
     {
         question: "Arrays in JavaScript can be used to store ___.",
@@ -42,14 +42,33 @@ var questionBank = [
 
 start.Btn.addEventListener("click", function() {
     countDown();
-    startQuiz(questionIndex);
+    startQuiz(questionBank);
 });
 
+// Using setInterval() method to call this function to be executed every 1000 milliseconds (every 1 second)
+function countdown() {        
+    timeInterval = setInterval(function() {
+    if(timeLeft >= 1) {
+        timerEl.textContent = "time remaining:  " + timeLeft;
+        timeLeft -= 1;
+    }
+    else if (timeLeft === 0){
+        timerEl.textContent = "";
+        clearInterval(timeInterval);
+        displayMessage();
+        quizDone();
+    }
+
+    function displayMessage() {
+        alert(timeOver);
+    };
+    }, 1000)
+};
+
+function stopCountdown() {
+    clearInterval(timeInterval);
+    timerEl.textContent = "Time is up!"
+};
 
 
-
-
-startGame();
-resetGame();
-highScoreEl.addEventListener("click", quizContentHandler);
-quizContentEl.addEventListener("click", quizContentHandler);
+// Figure out how to pull from array to start quiz
