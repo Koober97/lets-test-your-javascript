@@ -69,3 +69,7 @@ footer {
 .button:hover {
     background-color: purple;
 }
+
+.hide {
+    display: none;
+}
