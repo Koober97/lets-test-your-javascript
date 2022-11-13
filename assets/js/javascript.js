@@ -59,12 +59,7 @@ var questions = [
         title: "What is the HTML tag under which one can write the JavaScript code?",
         choices: ["<javascript>", "<scripted>", "<script>", "<js>"],
         answer: "<script>"
-    },
-    {
-        title: "Whose the best Peter?",
-        choices: ["Peter Collela", "Peter Parker", "Saint Peter", "Peter Jackson"],
-        answer: "Peter Collela"
-    },
+    }
 ]; 
 
 // Question/start countdown

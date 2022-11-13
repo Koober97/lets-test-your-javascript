@@ -2,36 +2,31 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java Quiz</title>
     <link rel="stylesheet" href="./assets/css/styles.css">
-    <title>JavaScript Pop Quiz!</title>
+
 </head>
 <body>
-    <header>
-        <h4 class="high-score">View High Scores</h4>
-        <h4>Time: <span class="timer">0</span></h4>
-    </header>
-    <section>
-        <div class="container" id="mainGame">
-            <div id="default-page">
-                <h1 class="quiz-question">Coding Quiz Challenge</h1>
-                <p>Let's see how much you know about JavaScript coding! There is a penalty for each wrong answer (-10 seconds), so try to get them in one go!</p>
-                <h2 class="quiz-content"></h2>
-                <button id="start" class="start-btn">Start Quiz</button>
-            </div>
+    <nav>
+        <a href="./highscore.html">View high scores</a>
+        <h2 id="countdown"></h2>
 
-            <div class="hide" id="quiz-content">
-                <h3 class="leader">Arrays in JavaScript can be used to store ___.</h3>
-                    <ul>
-                        <li><button id="choice-1">numbers and strings</button></li>
-                        <li><button id="choice-2">other arrays</button></li>
-                        <li><button id="choice-3">booleans</button></li>
-                        <li><button id="choice-4">all of the above</button></li>
-                    </ul>
-            </div>
+    </nav>
+    <main>
+        <div class="container" id="mainGame">
+            <h1 class="welcome">How much do you know about JS?</h1>
+            <h3>You will be penalized 10 seconds for 
+                every wrong answer. You'll have 90 seconds to answer 5 questions.
+            </h3>
+            <button id="start">Start quiz now</button>
         </div>
-    </section>
-    <script src="./assets/js/javascript.js"></script>
+
+    </main>
+
+    <!-- js link at bottom -->
+
+    <script src="./assets/js/script.js"></script>
+    
 </body>
 </html>
