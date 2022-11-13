@@ -1,115 +1,216 @@
-var timerEl = document.querySelector(".timer");
-var headerEl = document.querySelector("header");
-var highScoreEl = document.querySelector(".high-score");
-var quizHeaderEl = document.querySelector(".quiz-question");
-var quizContentEl = document.querySelector("#quiz-content");
-var defaultPageEl = document.querySelector("#default-page");
-var startButtonEl = document.querySelector(".start-btn");
-var questionTitleEl = document.querySelector(".leader");
-var buttonOneEl = document.querySelector("#choice-1");
-var buttonTwoEl = document.querySelector("#choice-2");
-var buttonThreeEl = document.querySelector("#choice-3");
-var buttonFourEl = document.querySelector("#choice-4");
-
 var score = 0;
 var questionIndex = 0;
-var timeLeft = 60;
-var currentQuestion = 0;
+
+var timeLeft = 90;
 var timeInterval = "";
-var timeOver = "You have run out of time!";
+var timerEl = document.getElementById("countdown");
+var mainGameEl = document.getElementById("mainGame");
+var startBtn = document.getElementById("start");
+var timeOver = "You have run out of time";
+var penalty = "10";
+var createOption = document.createElement("ul");
 
-// Question array to pull from
-var questionBank = [
-    {
-        question: "Arrays in JavaScript can be used to store ___.",
-        choice: ["numbers and strings", "other arrays", "booleans", "all of the above"],
-        answer: "all of the above",
-    },
-    {
-        question: "Commonly used data types DO Not Include:",
-        choice: ["strings", "booleans", "alerts", "numbers"],
-        answer: "booleans", 
-    },
-    {
-        question: "The condition in an if / else statement is enclosed with ___.",
-        choice: ["quotes", "curly brackets", "parenthesis", "square brackets"],
-        answer: "curly brackets",
-    },
-    {
-        question: "String values must be enclosed within ___ when being assigned to variables.",
-        choice: ["commas", "curly brackets", "quotes", "parenthesis"],
-        answer: "curly brackets",
-    },
-    {
-        question: "A very useful tool used during development and debugging for printing content to the debugger is:",
-        choice: ["JavaScript", "terminal/bash", "for loops", "console.log"],
-        answer: "console.log",
-    },
-];
+function startQuiz(questionIndex) {
+    // Clear screen
+        createOption.innerHTML = "";
+        mainGameEl.innerHTML = "";
+    
+    // Loop to go through all the questions
+    for (var i = 0; i < questions.length; i++) {
+        // Display the selected question title
+        var questionTitle = questions[questionIndex].title;
+        var questionChoices = questions[questionIndex].choices;
+
+        mainGameEl.textContent= questionTitle;
+    }
+    questionChoices.forEach(function (newButton) {
+        var optionList = document.createElement("button");
+        optionList.textContent = newButton;
+        optionList.setAttribute("id", "choices");
+        mainGameEl.appendChild(createOption);
+        createOption.appendChild(optionList);
+        optionList.addEventListener("click", (correctAnswer));
+    })
+    };
 
 
-// Using setInterval() method to call this function to be executed every 1000 milliseconds (every 1 second)
-function countDown() {        
-    timeInterval = setInterval(function() {
-        if(timeLeft >= 1) {
-            timerEl.textContent = "time remaining:  " + timeLeft;
-            timeLeft -= 1;
-        }
-        else if (timeLeft === 0){
-            timerEl.textContent = "";
-            clearInterval(timeInterval);
-            displayMessage();
-            quizDone();
+var questions = [
+    {
+        title: "String values must be enclosed within ____ when being assigned to variables.",
+        choices: ["commas", "curly brackets", "quotes", "parentheses"],
+        answer: "quotes"
+    },
+    {
+        title: "Commonly used data types DO NOT include:",
+        choices: ["strings", "booleans", "alerts", "numbers"],
+        answer: "alerts"
+    },
+    {
+        title: "A very useful tool used during development and debugging for printing content to the debugger is:",
+        choices: ["Javascript", "terminal / bash", "for loops", "console log"],
+        answer: "console log"
+    },
+    {
+        title: "The condition in an if / else statement is enclosed within ____.",
+        choices: ["quotes", "curly brackets", "parentheses", "square brackets"],
+        answer: "parentheses"
+    },
+    {
+        title: "What is the HTML tag under which one can write the JavaScript code?",
+        choices: ["<javascript>", "<scripted>", "<script>", "<js>"],
+        answer: "<script>"
+    },
+    {
+        title: "Whose the best Peter?",
+        choices: ["Peter Collela", "Peter Parker", "Saint Peter", "Peter Jackson"],
+        answer: "Peter Collela"
+    },
+]; 
+
+// Question/start countdown
+startBtn.addEventListener("click", function() {
+    countdown();
+    startQuiz(questionIndex);
+});
+
+    function correctAnswer(event) {
+        var element = event.target;
+        console.log(element);
+
+        if (element.matches("button")) {
+
+            var createDiv = document.createElement("div");
+            createDiv.setAttribute("id", "createDiv");
+            // Correct
+                if (element.textContent == questions[questionIndex].answer) {
+                    score ++;
+                    alert("That's right. The answer is: " + questions[questionIndex].answer);
+                }
+                else {
+                    // incorrect remove 10 seconds 
+                    timeLeft = timeLeft - penalty;
+                    alert("That's wrong. The correct answer is: " + questions[questionIndex].answer);
+                }
         }
         
-        function displayMessage() {
-            alert(timeOver);
-        };
+        questionIndex ++;
+
+        // Check if quiz is done 
+        if (questionIndex >= questions.length) {
+            quizDone();
+            createDiv.textContent = "Quiz over. You got " + score + " answers correct.";    
+            }
+            else {
+                startQuiz(questionIndex);                    
+            }
+            mainGameEl.appendChild(createDiv);
+    }
+
+// Quiz complete function
+function quizDone() {
+    mainGameEl.innerHTML = "";
+    stopCountdown();
+
+    // Tell user that quix is over with an h1 title
+    var h1El = document.createElement("h1");
+    h1El.setAttribute("id", "h1El");
+    h1El.textContent = "All done"
+
+    mainGameEl.appendChild(h1El);
+    var pEl = document.createElement("p");
+    pEl.setAttribute("id", "pEl");
+
+    mainGameEl.appendChild(pEl);
+
+    // Adds time remaining with score 
+    if (timeLeft >= 0) {
+        var timeRemaining = timeLeft;
+        var pEl2 = document.createElement("p");
+        pEl2.textContent = "Your final score is: " + timeRemaining;
+        mainGameEl.appendChild(pEl2);
+    }
+
+    // Labels score with initials
+    var createLabel = document.createElement("label");
+    createLabel.setAttribute("id", "createLabel");
+    createLabel.textContent = "Enter your initials: ";
+
+    mainGameEl.appendChild(createLabel);
+
+    // Sets users initials
+    var createInput = document.createElement("input");
+    createInput.setAttribute("type", "text");
+    createInput.setAttribute("id", "initials");
+    createInput.textContent = "";
+
+    mainGameEl.appendChild(createInput);
+
+    // Button to capture highscore
+    var createSubmit = document.createElement("button");
+    createSubmit.setAttribute("type", "submit");
+    createSubmit.setAttribute("id", "Submit");
+    createSubmit.textContent = "Submit";
+
+    mainGameEl.appendChild(createSubmit);
+
+
+    // Local stoage highscore
+    createSubmit.addEventListener("click", function () {
+        var initials = createInput.value;
+
+        if (!initials) {
+            alert("You must enter your initials")        
+            console.log("No value entered");
+
+        } else {
+            var finalScore = {
+                initials: initials,
+                score: timeRemaining
+            }
+            console.log(finalScore);
+            var highScores = localStorage.getItem("highScores");
+            if (highScores === null) {
+                highScores = [];
+            } else {
+                highScores = JSON.parse(highScores);
+            }
+            highScores.push(finalScore);
+            var newScore = JSON.stringify(highScores);
+            localStorage.setItem("highScores", newScore);
+
+            // Bring user to high score page
+            window.location.replace("./highscore.html");
+        }
+    });
+
+};
+
+// Timer function
+function countdown() {        
+    // Use the setInterval() method to call a function to be executed every 1000 milliseconds (every 1 second)
+    timeInterval = setInterval(function() {
+    if(timeLeft >= 1) {
+        timerEl.textContent = "time remaining:  " + timeLeft;
+        timeLeft -= 1;
+    }
+    else if(timeLeft === 0){
+        timerEl.textContent = "";
+        clearInterval(timeInterval);
+        console.log("I'm here");
+        displayMessage();
+        quizDone();
+    }
+
+    function displayMessage() {
+        alert(timeOver);
+    };
     }, 1000)
 };
 
-// intro goes away and changes screen to question array
-function startQuiz() {
-    defaultPageEl.classList.add("hide");
-    quizContentEl.classList.remove("hide");
-    displayQuestion();
-};
-
-// question comes up with 4 answer choices
-function displayQuestion() {
-    console.log(questionBank[questionIndex].question);
-    questionTitleEl.textContent = questionBank[questionIndex].question;
-    buttonOneEl.textContent = questionBank[questionIndex].choice[0];
-    buttonTwoEl.textContent = questionBank[questionIndex].choice[1];
-    buttonThreeEl.textContent = questionBank[questionIndex].choice[2];
-    buttonFourEl.textContent = questionBank[questionIndex].choice[3];
-}
-function nextQuestion() {
-    questionIndex++
-    displayQuestion();
-}
-
-buttonOneEl.addEventListener("click", nextQuestion)
-
-
-// if correct - correct shows up below, if incorrect - incorrect shows up and time is taken away from time remaining
-
-// once questions are done, enter initials for highscore is shown with submit
-
-// after submitting, highscore page is shown with the given initials clear highscore or go back button
-
-// clear highscore removes all scores stored
-
-// go back brings back to default/initial screen restarting the whole process
-
-function stopCountdown() {
+    // Stop timer function
+    function stopCountdown() {
     clearInterval(timeInterval);
     timerEl.textContent = "Time is up!"
-};
-
-startButtonEl.addEventListener("click", function() { // callback
-    countDown();
-    startQuiz();
-});
-
-// Figure out how to pull from array to start quiz
+    console.log("countdown stopped");
+    console.log(timeInterval);
+    }
