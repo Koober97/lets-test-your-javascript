@@ -21,6 +21,6 @@
 
 ## Deployed Link
 
--
+- https://koober97.github.io/lets-test-your-javascript/
 
 ### Created by Brian Koo
